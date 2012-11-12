@@ -11,8 +11,6 @@ Crie uma classe Lembrete com um atributo List<String> tarefas.
 Em um método main, crie um mapa cujas chaves serão os dias
 da semana(String) e os valores serão objetos da classe Lembrete.
 Escreva algum código demonstrando a estrutura criada.
-
-OBS: A funçao main está nesse arquivo
 */
 public class Lembrete {
     List<String> tarefas;
@@ -27,11 +25,11 @@ public class Lembrete {
     
     @Override
     public String toString() {
-        String resp=" ";
+        String resposta=" ";
         for (int i = 0; i < tarefas.size(); i++) {
-            resp+=tarefas.get(i)+"/";
+            resposta+=tarefas.get(i)+"/";
         }
-        return resp.substring(0, resp.length()-1);
+        return resposta.substring(0, resposta.length()-1);
     }
 }
 
@@ -42,43 +40,32 @@ class TesteLembrete {
         Lembrete[] lembretes = new Lembrete[7];
         inicializa(lembretes);
         Map<String,Lembrete> mapa = new LinkedHashMap<String, Lembrete>();
-        mapa.put("Segunda", lembretes[0]);
-        mapa.put("Terça", lembretes[1]);
-        mapa.put("Quarta", lembretes[2]);
-        mapa.put("Quinta", lembretes[3]);
-        mapa.put("Sexta", lembretes[4]);
-        mapa.put("Sabado", lembretes[5]);
-        mapa.put("Domingo", lembretes[6]);
-        menu(lembretes);
+        String[] dias = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta",
+                                                    "Sabado", "Domingo"};
+        for (int i = 0; i < dias.length; i++) {
+            mapa.put(dias[i],lembretes[i]);
+        }
+        menu(lembretes,dias);
         System.out.println(mapa);
     }
 
-    private static void menu(Lembrete[] lembretes) {
+    private static void menu(Lembrete[] lembretes, String[] dias) {
         String dia="";
         do{
             dia = JOptionPane.showInputDialog("Diga um dia da semana: ");
-            if(dia.equals("Segunda")){
-                lembretes[0].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Terça")){
-                lembretes[1].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Quarta")){
-                lembretes[2].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Quinta")){
-                lembretes[3].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Sexta")){
-                lembretes[4].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Sabado")){
-                lembretes[5].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("Domingo")){
-                lembretes[6].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
-            }else if(dia.equals("STOP")){
-                continue;
-            }else{
+            boolean adicionou = false;
+            for (int i = 0; i < dias.length; i++) {
+                if(dia.equals(dias[i])){
+                    lembretes[i].addTarefas(JOptionPane.showInputDialog("Diga uma tarefa para "+dia+": "));
+                    adicionou=true;
+                }
+            }
+            if(!adicionou && !dia.equals("STOP")){
                 JOptionPane.showMessageDialog(null,"Diga um dia da semana válido!!");
             }
          }while(!dia.equals("STOP"));
     }
-
+    
     private static void inicializa(Lembrete[] lembretes) {
         for (int i = 0; i < lembretes.length; i++) {
             lembretes[i]=new Lembrete();

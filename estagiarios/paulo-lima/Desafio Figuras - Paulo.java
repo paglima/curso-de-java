@@ -67,7 +67,7 @@ public class Triangulos {
     public String figura5(){
 		String resp="";
 		for (int linha=0; linha<21;linha++) {
-		   for (int coluna=0; coluna <20; coluna++){
+			for (int coluna=0; coluna <20; coluna++){
 		        if(linha+coluna>=20 &&linha<=coluna){
 		            resp+="*";
 		        }else{

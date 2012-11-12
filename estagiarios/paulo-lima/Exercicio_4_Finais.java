@@ -31,10 +31,12 @@ public class Exercicio_4_Finais {
             Set<String> chaves=headers.keySet();
             Iterator<String> percorreChave = chaves.iterator();
             String chave;
+            System.out.println(headers);
             while(percorreChave.hasNext()){
                chave=percorreChave.next();
                System.out.println(headers.get(chave));
             }
+            //System.out.println(headers.keySet());
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
